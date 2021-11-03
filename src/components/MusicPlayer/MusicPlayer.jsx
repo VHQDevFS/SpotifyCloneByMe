@@ -1,5 +1,4 @@
 import {
-  Favorite,
   FavoriteBorder,
   PictureInPicture,
   Shuffle,
@@ -15,7 +14,7 @@ import {
 } from '@mui/icons-material'
 
 import { makeStyles } from '@mui/styles'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import './music-player.css'
@@ -33,25 +32,17 @@ const useStyles = makeStyles({
 })
 
 const MusicPlayer = () => {
-  const classes = useStyles()
-  // const [rangeValue, setRangeValue] = useState(0)
-  const [isPlay, setIsPlay] = useState(false)
-  const [currentTimeSong, setCurrentTimeSong] = useState('0:00')
-  const [durationSong, setDurationSong] = useState('')
-
   const song = useSelector(state => state.playReducer.song)
   const { title, creator, avatar, music, playing } = song
+  const classes = useStyles()
+  const [isPlay, setIsPlay] = useState(playing)
+  const [currentTimeSong, setCurrentTimeSong] = useState('0:00')
+  const [durationSong, setDurationSong] = useState('')
+  const [volumeIcon, setVolumeIcon] = useState('full')
 
   const handleBtnPlay = () => {
     setIsPlay(!isPlay)
   }
-  useEffect(() => {
-    const audio = document.getElementById('music-player__audio')
-    if (playing) {
-      audio.play()
-      setIsPlay(true)
-    } 
-  }, [playing])
 
   useEffect(() => {
     const audio = document.getElementById('music-player__audio')
@@ -75,6 +66,7 @@ const MusicPlayer = () => {
       setDurationSong(fancyTimeFormat(Math.floor(audio.duration)))
       setCurrentTimeSong(fancyTimeFormat(Math.floor(audio.currentTime)))
 
+      //current time
       let checkOnmouseAndTouch = true
       progressTime.onmousedown = () => {
         checkOnmouseAndTouch = false
@@ -84,7 +76,10 @@ const MusicPlayer = () => {
         checkOnmouseAndTouch = false
       }
       if (audio.duration && checkOnmouseAndTouch) {
-        const progressPercent = Math.floor((audio.currentTime / audio.duration) * 100)
+        let progressPercent = Math.floor((audio.currentTime / audio.duration) * 100)
+        if (isNaN(progressPercent)) {
+          progressPercent = 0
+        }
         progressTime.value = progressPercent
       }
 
@@ -103,10 +98,43 @@ const MusicPlayer = () => {
       }
 
       soundVolume.onchange = e => {
+        if (isNaN(e.target.value)) {
+          audio.volume = 0.1
+        }
         audio.volume = e.target.value
       }
     }
   }, [])
+
+  const handleChangeSound = e => {
+    const volumeValue = Number(e.target.value)
+    if (volumeValue === 0) {
+      setVolumeIcon('zero')
+    } else if (volumeValue > 0 && volumeValue <= 0.5) setVolumeIcon('half')
+    else setVolumeIcon('full')
+  }
+
+  useEffect(() => {
+    // const audio = document.getElementById('music-player__audio')
+
+    function handlePreventSpace(e) {
+      console.log(e.which)
+      if (e.keyCode === 32 && e.target === document.body) {
+        e.preventDefault()
+        setIsPlay(!isPlay)
+      }
+
+      // if (e.keyCode === 77) {
+      //   audio.volume = 0
+      // } else audio.volume = 1
+    }
+    window.addEventListener('keydown', handlePreventSpace)
+
+    return () => {
+      window.removeEventListener('keydown', handlePreventSpace)
+    }
+  }, [isPlay])
+
   return (
     <div className="music-player__wrapper">
       <div className="music-player__left">
@@ -190,9 +218,13 @@ const MusicPlayer = () => {
         </div> */}
         <div className="music-player__sound">
           <div className="music-player__sound--icon">
-            <VolumeUp fontSize="large" />
-            {/* <VolumeDown/>
-          <VolumeOff/> */}
+            {volumeIcon === 'zero' ? (
+              <VolumeOff style={{ fontSize: '2.5rem' }} />
+            ) : volumeIcon === 'half' ? (
+              <VolumeDown style={{ fontSize: '2.5rem' }} />
+            ) : (
+              <VolumeUp style={{ fontSize: '2.5rem' }} />
+            )}
           </div>
         </div>
         <label htmlFor="sound" id="music-player__progressbar--sound">
@@ -203,6 +235,7 @@ const MusicPlayer = () => {
             min="0"
             max="1"
             step="0.1"
+            onChange={e => handleChangeSound(e)}
           />
         </label>
         <div className="music-player__fullscreen">

@@ -28,6 +28,5 @@ export const getGenreSong = genre => {
 }
 
 export const getSongToPlay = song => {
-  console.log('song: ', song)
   return { type: GET_SONG_TO_PLAY, payload: song }
 }

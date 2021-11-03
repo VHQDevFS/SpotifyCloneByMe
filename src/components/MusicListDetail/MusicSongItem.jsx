@@ -2,10 +2,15 @@ import { useRef, useState } from 'react'
 import './music-song-item.css'
 import { fancyTimeFormat } from '../../helpers'
 
-import { useDispatch } from 'react-redux'
-import { getSongToPlay } from '../../redux/actions'
-
-export default function MusicSongItem({ title, creator, avatar, index, genre, music }) {
+export default function MusicSongItem({
+  title,
+  creator,
+  avatar,
+  index,
+  genre,
+  music,
+  handleGetSongToPlay
+}) {
   const [duration, setDuration] = useState('')
   const audioRef = useRef(null)
 
@@ -15,11 +20,6 @@ export default function MusicSongItem({ title, creator, avatar, index, genre, mu
     }
   }
 
-  const dispatch = useDispatch()
-
-  const handleGetSongToPlay = (title, creator, avatar, music, index) => {
-    dispatch(getSongToPlay({ title, creator, avatar, music, index, playing: true }))
-  }
   return (
     <div
       className="music-song--item"

@@ -9,14 +9,15 @@
   display: flex;
   justify-content: space-between;
   background-color: #181818;
+  z-index: 99;
 }
 
 .music-player__left {
   display: flex;
   align-items: center;
   color: #fff;
-  width: 35%;
   min-width: 30rem;
+  flex: 1;
 }
 
 .music-player__avatar {
@@ -61,7 +62,8 @@
   justify-content: center;
   align-items: center;
   min-width: 60rem;
-  width: 50%;
+  flex: 1;
+  margin-left: 5rem;
 }
 
 .music-player__button {
@@ -90,7 +92,6 @@
   margin: 0 0 3px 12px;
   font-size: 1.3rem;
   width: 3rem;
-
 }
 
 .music-player__progress {
@@ -133,9 +134,10 @@
 .music-player__right {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   color: #fff;
-  width: 20%;
+  flex: 1;
+  padding-right: 1rem;
 }
 
 .music-player__sound {

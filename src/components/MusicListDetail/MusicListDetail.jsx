@@ -2,10 +2,13 @@ import './music-list-detail.css'
 import { FavoriteBorder, PlayArrow, MoreHoriz, AccessTime } from '@mui/icons-material'
 import { makeStyles } from '@mui/styles'
 import MusicSongItem from './MusicSongItem'
+
+import { getSongToPlay } from '../../redux/actions'
 import { useSelector } from 'react-redux'
 
 import Proptypes from 'prop-types'
 
+import { useDispatch } from 'react-redux'
 const useStyles = makeStyles({
   mr: {
     marginRight: '2rem'
@@ -22,14 +25,15 @@ const useStyles = makeStyles({
 const MusicListDetail = ({ songList }) => {
   const genreList = useSelector(state => state.genreReducer.genreList)
 
-
-  
   const newGenreList = songList.filter(songGenre => songGenre.name === genreList)
 
   const classes = useStyles()
   const coverImage = newGenreList[0].songs[0].coverImage
 
-  
+  const dispatch = useDispatch()
+  const handleGetSongToPlay = (title, creator, avatar, music, index) => {
+    dispatch(getSongToPlay({ title, creator, avatar, music, index, playing: true }))
+  }
 
   return (
     <>
@@ -89,6 +93,7 @@ const MusicListDetail = ({ songList }) => {
                 creator={song.creator}
                 title={song.title}
                 music={song.music}
+                handleGetSongToPlay={handleGetSongToPlay}
               />
             ))}
         </div>
