@@ -1,0 +1,35 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+
+:root{
+  --bgcolor-sidebar:#000;
+  --bgcolor--content:#121212;
+  --bgcolor:#181818;
+  --bgcolor-active:#5a5a5a;
+  --bgcolor-hover:#2a2a2a;
+  ;
+  --spacing: 2rem;
+  --sidebar-width: 28rem;
+}
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+

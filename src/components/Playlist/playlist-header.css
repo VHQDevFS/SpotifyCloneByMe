@@ -1,0 +1,19 @@
+.playlist-header__wrapper {
+  background-image: linear-gradient(to right bottom, #521130, #3C1226);
+  background-color: #ccc;
+}
+
+.playlist-header__greeting {
+  color: #fff;
+  font-size: 3.5rem;
+  padding: 1rem;
+  margin-left: 2rem;
+}
+
+.playlist-header__container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(-1 * 2rem);
+  margin-top: 2rem;
+  padding: 0 3rem;
+}

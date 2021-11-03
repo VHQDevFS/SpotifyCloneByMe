@@ -1,0 +1,26 @@
+.content__wrapper {
+  margin-left: calc(var(--sidebar-width));
+  background-color: var(--bgcolor--content);
+  height: auto;
+  width: 100%;
+  margin-top: 6rem;
+  padding-bottom: 10rem;
+}
+
+
+.play-btn {
+  width: 4rem; height: 4rem;
+  border-radius: 50%;
+  background-color: orange;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: 0;
+  border: none;
+}
+.play-btn:hover, .play-btn:active {
+  transition: transform 33ms cubic-bezier(.3,0,0,1),
+  -webkit-transform 33ms cubic-bezier(.3,0,0,1);
+  transform: scale(1.1);
+}

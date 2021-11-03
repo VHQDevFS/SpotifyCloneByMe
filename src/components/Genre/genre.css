@@ -1,0 +1,78 @@
+.genre {
+  margin: 1rem 3rem 0;
+}
+
+.genre__label {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.genre__container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(-1 * 2rem);
+}
+
+.genre__item {
+  width: calc((100% / 4) - 2rem);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  background-color: var(--bgcolor);
+  padding: 2rem;
+  margin: 0 0 2rem 2rem;
+  transition: all 0.1s ease-in ;
+  -webkit-transition: background-color 0.2s ease-in ;
+  -moz-transition: background-color 0.2s ease-in ;
+  -ms-transition: background-color 0.2s ease-in ;
+  -o-transition: background-color 0.2s ease-in ;
+  overflow: hidden;
+  position: relative;
+}
+
+.genre__item:hover {
+  background-color: var(--bgcolor-hover);
+
+}
+
+.genre__coverImg {
+  display: block;
+  height: 19rem;
+  border-radius: 0.3rem;
+}
+
+.genre__title {
+
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.genre__desc {
+  margin-top: 0.5rem;
+  color: rgb(179, 179, 179);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.play-btn__genre {
+  position: absolute;
+  bottom: 30%;
+  right: 2.5rem;
+
+  visibility: hidden;
+  
+  transition: all 0.1s ease-in;
+  -webkit-transition: visibility 0.1s ease-in;
+  -moz-transition: visibility 0.1s ease-in;
+  -ms-transition: visibility 0.1s ease-in;
+  -o-transition: visibility 0.1s ease-in;
+}
+
+.genre__item:hover .play-btn__genre {
+  visibility: visible;  
+
+}
